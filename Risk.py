@@ -10,7 +10,10 @@ from Tkinter import *
 from PIL import Image, ImageTk
 import random
 import sys
+import os
 import time
+
+directory = sys.path[0]
 
 class MainScreen(Canvas):
 	def __init__(self, parent):
@@ -162,44 +165,44 @@ class MainScreen(Canvas):
 		self.chat.delete(0, len(self.chat.get()))
 
 	def create_welcome_screen(self):
-		image = Image.open("welcome.png")
+		image = Image.open(os.path.join(directory, 'src/welcome.png'))
 		photo = ImageTk.PhotoImage(image)
 		self.w.create_image((500, 375), image = photo)
 		self.image = photo
 
 		# Loading Quit Button
-		q_im = Image.open('quit.png')
+		q_im = Image.open(os.path.join(directory, 'src/quit.png'))
 		q_pic = ImageTk.PhotoImage(q_im)
 		q = Button(self.parent, image = q_pic, command = lambda: sys.exit())
 		self.w.create_window(850, 675, window = q)
 		self.extra_6 = q_pic
 
 		# Loading Images for player buttons
-		two_p_im = Image.open('two_players.png')
+		two_p_im = Image.open(os.path.join(directory, 'src/two_players.png'))
 		two_p_pic = ImageTk.PhotoImage(two_p_im)
 		two_players = Button(self.parent, image = two_p_pic, command = lambda: self.choose_players(2))
 		self.w.create_window(203, 460, window = two_players)
 		self.extra_1 = two_p_pic
 
-		three_p_im = Image.open('three_players.png')
+		three_p_im = Image.open(os.path.join(directory, 'src/three_players.png'))
 		three_p_pic = ImageTk.PhotoImage(three_p_im)
 		three_players = Button(self.parent, image = three_p_pic, command = lambda: self.choose_players(3))
 		self.w.create_window(203, 510, window = three_players)
 		self.extra_2 = three_p_pic
 
-		four_p_im = Image.open('four_players.png')
+		four_p_im = Image.open(os.path.join(directory, 'src/four_players.png'))
 		four_p_pic = ImageTk.PhotoImage(four_p_im)
 		four_players = Button(self.parent, image = four_p_pic, command = lambda: self.choose_players(4))
 		self.w.create_window(203, 560, window = four_players)
 		self.extra_3 = four_p_pic
 
-		five_p_im = Image.open('five_players.png')
+		five_p_im = Image.open(os.path.join(directory, 'src/five_players.png'))
 		five_p_pic = ImageTk.PhotoImage(five_p_im)
 		five_players = Button(self.parent, image = five_p_pic, command = lambda: self.choose_players(5))
 		self.w.create_window(203, 610, window = five_players)
 		self.extra_4 = five_p_pic
 
-		six_p_im = Image.open('six_players.png')
+		six_p_im = Image.open(os.path.join(directory, 'src/six_players.png'))
 		six_p_pic = ImageTk.PhotoImage(six_p_im)
 		six_players = Button(self.parent, image = six_p_pic, command = lambda: self.choose_players(6))
 		self.w.create_window(203, 660, window = six_players)
@@ -209,13 +212,13 @@ class MainScreen(Canvas):
 		self.w.delete('all') # clear canvas
 
 		# Create background
-		newimage = Image.open('riskmap.png')
+		newimage = Image.open(os.path.join(directory, 'src/riskmap.png'))
 		newphoto = ImageTk.PhotoImage(newimage)
 		self.w.create_image((400,272), image = newphoto, tag = 'background')
 		self.image = newphoto
 
 		# Create arrows
-		arrowimage = Image.open('arrow.png')
+		arrowimage = Image.open(os.path.join(directory, 'src/arrow.png'))
 		arrowphoto = ImageTk.PhotoImage(arrowimage)
 		self.w.create_image((820,42), image = arrowphoto, tag = 'name_arrow')
 		self.w.create_image((820, 225), image = arrowphoto, tag = 'turn_arrow')
@@ -360,11 +363,11 @@ class Player:
 		global swap
 		card_coords = [(642,646), (722,646), (801,646), (880,646), (959,646)]
 		if swap == True:
-			cannonimage = Image.open('cannon.png')
+			cannonimage = Image.open(os.path.join(directory, 'src/cannon.png'))
 			cannonphoto = [ImageTk.PhotoImage(cannonimage), ImageTk.PhotoImage(cannonimage), ImageTk.PhotoImage(cannonimage), ImageTk.PhotoImage(cannonimage), ImageTk.PhotoImage(cannonimage)]
-			horseimage = Image.open('horse.png')
+			horseimage = Image.open(os.path.join(directory, 'src/horse.png'))
 			horsephoto = [ImageTk.PhotoImage(horseimage), ImageTk.PhotoImage(horseimage), ImageTk.PhotoImage(horseimage), ImageTk.PhotoImage(horseimage), ImageTk.PhotoImage(horseimage)]
-			soldierimage = Image.open('soldier.png')
+			soldierimage = Image.open(os.path.join(directory, 'src/soldier.png'))
 			soldierphoto = [ImageTk.PhotoImage(soldierimage), ImageTk.PhotoImage(soldierimage), ImageTk.PhotoImage(soldierimage), ImageTk.PhotoImage(soldierimage), ImageTk.PhotoImage(soldierimage)]
 			for i in range(0, len(self.my_cards)):
 				if self.my_cards[i] == 'cannon':
@@ -378,7 +381,7 @@ class Player:
 					w.cards[i] = soldierphoto
 			swap = False
 		if swap == False:
-			cardimage = Image.open('card.png')
+			cardimage = Image.open(os.path.join(directory, 'src/card.png'))
 			cardphoto = [ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage)]
 			for i in range(0, len(self.my_cards)):
 				w.w.create_image(card_coords[i], image = cardphoto[i], tag = 'card' + str(i))
@@ -486,7 +489,7 @@ class Player:
 				troops += self.play_cards()'''
 
 		# create dem cards
-		cardimage = Image.open('card.png')
+		cardimage = Image.open(os.path.join(directory, 'src/card.png'))
 		cardphoto = [ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage), ImageTk.PhotoImage(cardimage)]
 		card_coords = [(642,646), (722,646), (801,646), (880,646), (959,646)]
 		how_many = [0, 0, 0, 0, 0, 0] # how many cards each player has
